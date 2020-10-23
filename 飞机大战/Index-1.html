@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="Index1.css"/>
+
+<audio id="mus" loop="loop" preload="auto" autoplay="autoplay">
+<source src="sound/finish.mp3" type="audio/mp3"/>
+</audio>
+
+<title>飞机大战</title>
+
+<script type="text/javascript">
+	
+$(
+/*运行函数*/
+function(){
+	var bg = document.getElementById("cen");
+	var zhant = false;
+	var bgtime;
+$("#sgame").click(function(){
+	
+	if(zhant == false)
+	{
+		zhant = true;
+	}
+	else if( zhant==true)
+	{
+		zhant = false;
+	}
+	
+	
+	//判断背景音乐的播放
+		var Mus=document.getElementById('mus');
+		//背景图像的获取
+		var bg1=document.getElementById("bg1");
+	    var bg2=document.getElementById("bg2");
+		
+		
+		if(Mus.paused){
+			Mus.play();
+        bgtime=setInterval(function(){
+			if(bg1.offsetLeft<-1020)
+		{
+			bg1.style.left=1020+"px";
+	    }
+		else if(bg2.offsetLeft<-1020)
+		{
+			bg2.style.left=1020+"px";
+	    }
+		else
+		{
+			bg1.style.left=bg1.offsetLeft-2+"px";
+			bg2.style.left=bg2.offsetLeft-2+"px";
+				/*<!--if(bg1.offsetTop>=540)
+				{
+					bg1.style.Top=-540+"px";
+					
+				}
+				if(bg2.offsetTop>=540)
+				{
+					bg2.style.Top=-540+"px";
+					
+				}
+		else
+		{	bg1.style.top=bg1.offsetTop+5+"px";
+			bg2.style.top=bg2.offsetTop+5+"px";-->*/
+			
+		}},10)
+			
+		var yuns =setInterval(function(){ 
+			  //敌机程序
+			var em = document.createElement("div");
+			var speed=0;
+			bg.appendChild(em);
+			em.innerHTML="<div style='width:10px;height:10px;position:absolute;z-index:999;'><img src='images/a31285835057879a57520160c5c9b772.png'width='15px' height='15px'  /></div>";
+			em.setAttribute("class","stone");
+			
+			em.style.left=950+"px";
+			em.style.top=Math.ceil(Math.random()*50)*10+"px";//随机X轴
+	  		
+			/*setInterval(function(){
+			em.style.left=em.offsetleft-10+"px";
+            if(em.offsetleft<10){em.style.display="none";}
+			},300)*/
+			
+			  //敌机降落
+				
+		
+			   var zhan = setInterval(function(){
+					em.style.left=950-speed+"px";
+					speed=speed+1;
+				   //定时器暂停，但是不知道为什么不能继续
+				   if(zhant==false){
+						window.clearInterval(yuns);
+						window.clearInterval(zhan);
+					}
+					if(em.style.right>950){
+						bg.removeChild(em);
+						}
+					},1);
+				
+			  },500);
+		
+	//加入键盘获取事件
+	keydowns();
+			 }
+	else{
+			Mus.pause();
+			clearInterval(bgtime);
+			//解除键盘获取事件
+			$(document).unbind("keydown")
+			}
+	
+	
+	})
+	}
+	)
+	
+/********创建键盘的按键获取*******************************************/
+	function keydowns(){
+		
+		$(document).keydown(function(event){
+			//JQ方式获得div在父容器的相对位置
+            //var airY=airs.offsetTop;
+			
+			var bg = document.getElementById("cen");
+			var airX=$("#air").position().left;
+			var airY=$("#air").position().top;
+		//$("#secondElementId").offset({ top: offset.top, left: offset.left})
+			//判断按下的按钮
+			switch(event.keyCode)
+			{
+			case 37:
+		   if(airX>10){
+				airX-=20;
+			$("#air").css("left",airX+"px")}
+		     break;
+		
+		    case 39:
+			if(airX<1000){
+				airX+=20;
+			$("#air").css("left",airX+"px")}
+			break;
+		
+		   case 38:
+			if(airY>10){
+				airY-=20;
+			$("#air").css("top",airY+"px")}
+		
+			break;
+		
+		  case 40:
+			if(airY<520){
+		     airY+=20;
+			$("#air").css("top",airY+"px")}
+			break;
+			
+			//子弹创建
+		  case 32:
+			var bul = document.createElement("div");
+			var speed=0;
+			bg.appendChild(bul);
+			bul.innerHTML="<div style='width:10px;height:10px;position:absolute;z-index:999;'><img src='images/bullet.png' width='15px' height='8px'/></div>";
+			bul.setAttribute("class","bul");
+			console.log(bul.style.left);
+			bul.style.left=airX+"px";
+			bul.style.top=airY+5+"px";  
+			//子弹射出
+			for(var i=0;i<5;i++){
+				setInterval(function(){
+					bul.style.left=airX+speed+"px";
+					speed=speed+4;
+			//碰撞		
+			var b=new Array();
+			var m=new Array();
+			var boom=document.getElementById("boom");
+			b=document.getElementsByClassName("bul");
+			m=document.getElementsByClassName("stone");
+			
+			for(var i=0;i<b.length;i++){
+				for(var j=0;j<m.length;j++){
+					
+					//不知道为什么b[i]一直获取不到offsetTop值
+					//if((b[i].style.top==m[j].style.top)&&(b[i].style.left==m[j].style.left)){
+				      if((b[i].offsetTop-m[j].offsetTop)<5&&(b[i].offsetLeft-m[j].offsetLeft)<5){	
+								  console.log(b[i].style.top);
+								  console.log(m[j].style.top);
+								  boom.style.top=b[i].offsetTop+"px";
+								  boom.style.left= b[i].offsetLeft+"px";
+								  boom.style.display="block";
+								  bg.removeChild(b[i]);
+								  bg.removeChild(m[j]);
+								  //$("#boom").slideDown();
+								  for(var i=0;i<5;i++){
+								  setInterval(function(){
+									boom.style.display="none";
+								   },1000);
+								  }
+							}
+						}
+					}
+					
+					},100);
+				}
+					
+			break;
+			}
+			
+			})
+			
+	}
+/********创建陨石*******************************************/
+
+	
+	/*var stones=$("#air").append("<div></div>");
+	 stones.addClass("stone");
+	 $(".stone").css({})*/
+	/* var enemyplan=document.createElement("div")  //创建div
+
+		
+		bg.appendChild(enemyplan);      //向父级容器BG 添加创建的div
+
+		enemyplan.innerHTML="<div class='stone'></div>";
+		
+		  //给陨石添加样式，因为陨石不止以可，所以选择类样式添加
+
+		enemyplan.setAttribute("class","stone");    
+		 //开始给定初始坐标位置，横坐固定小于1024（注横坐标设置时，注意陨石本身大小避免图片在窗体加载开始时，显示不全），纵坐标随机。
+
+	    enemyplan.style.top=Math.ceil(Math.random()*30)*10+"px";//随机X轴
+
+		enemyplan.style.left=10+"px";
+		
+		   //因为运行轨迹过程中是纵坐标不变，横坐标一直改变
+
+		var em=setInterval(function(){
+
+			enemyplan.style.left=enemyplan.offsetleft-10+"px";
+
+            if(enemyplan.offsetleft<10){enemyplan.style.display="none";}
+
+			},300)*/
+	
+  
+	
+	
+	
+
+		
+/********子弹创建*******************************************/
+
+
+
+</script>
+</head>
+
+
+
+
+
+	
+<body>
+	<div id="wq">
+		<div id="nav">
+			<img class="logo" src="logo/logo-02.png" style="margin-left: 300px;" />
+			<div id="sgame">play</div>
+			<img class="logo" src="logo/logo-01.png"  />
+		</div>
+		
+		<div id="cen">
+			<div id="bg1"></div>
+			<div id="bg2"></div>
+			<img src="images/1c163e74063f9a6ca4d7448bf38fc296.png" id="air"/>
+			
+			<div id="boom"><img src="images/boom.png" /></div> 
+		</div>
+		
+	</div>
+</body>	
+</html>

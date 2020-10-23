@@ -1,0 +1,78 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin:0;padding:0;
+}
+#wq{
+	width: 1023px;
+	height: 630px;
+	text-align: center;
+	margin:auto;
+}
+/*游戏主窗体模块*/
+#cen{width:1023px;height:565px;position:absolute;overflow:hidden;}
+#bg1,#bg2{
+	margin:0px 0px;
+	width:1024px;
+	height:550px;
+	background-image:url(images/background-2.jpg);
+	position:absolute;
+	}
+/*设置两个背景初始位置*/
+#bg1{
+	left:0px;
+	/*top:10px;*/
+	z-index:2;
+	}
+#bg2{
+	
+	left:1022px;
+	/*top:-540px;*/
+	z-index:3;
+	}
+	
+/*菜单栏和logo展示*/
+#nav{width:1023px;z-index:5;height:65px;background-color:#C39;}
+
+/*按钮样式设置*/
+#sgame{width:100px;height:50px; background-color:#0FF; float:left; 
+margin:10px 0px 0px 20px; text-align:center;line-height:50px; }
+
+.logo{float:left;width:150px; height:65px}
+
+/*飞机样式*/
+
+#air{width:20px; height:20px; z-index:4; position:absolute;top:300px;left: 20px;}
+
+/*陨石样式样式*/
+.stone{
+	position:relative;
+	width:10px;
+	height:10px;
+	z-index:8; 
+	position:absolute;
+/*background-image:url(images/aestroid_gray.png)
+*/
+}
+
+/*子弹样式样式*/
+.bul{
+
+		position:relative;
+		width:10px;
+		height:10px;
+		position:absolute;
+	 	z-index:7; 
+
+	 }
+#boom{
+		width:10px;
+		height:10px;
+		position:absolute;
+		z-index:9999;
+		left:-9999px;
+		}
+
+
+
+
