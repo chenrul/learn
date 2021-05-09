@@ -118,8 +118,8 @@
     * 在元素后插入内容和样式
     * 和:before都是行内元素
     > content:""; 只有拥有这个属性才能显示
-        属性值 content:" "attr(class)" " 可以获取元素的class属性追加元素的文本两侧
-        配合**:empty**可实现占位符效果 `p:empty::before{ cotent:"提示文本"}`
+    属性值 content:" "attr(class)" " 可以获取元素的class属性追加元素的文本两侧
+    配合**:empty**可实现占位符效果 `p:empty::before{ cotent:"提示文本"}`
 * ::first-line 选中第一行
 * ::first-letter 选中第一个字符
 * ::selection 匹配被鼠标选中的部分
