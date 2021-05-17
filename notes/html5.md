@@ -538,7 +538,7 @@
 ### from标签
 * 标签用来定义一个表单，所有表单中的内容都要放在里面
 * 示例：这是一个拥有用户名、文本输入框和提交按钮的表单
-    
+
     ```html
         <form action="https://example.com/api" method="post">
             <label for="POST-name">用户名：</label>
