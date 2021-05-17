@@ -49,10 +49,10 @@
 #### id选择器
 * 元素的ID在页面中是唯一的，所以ID选择器能选择一个唯一的元素
 * 写法为#后面紧跟ID属性值
-    > PS:id名称和类名不能为数字开头
+    > PS：ID名称和类名不能为数字开头
 #### 类选择器
 * 写法和ID选择器类似，在.后面紧跟元素的class属性值 
-    > PS:html元素能引用多个类，如：`<p class="center large">这个段落引用两个类。</p>`
+    > PS：HTML元素能引用多个类，如：`<p class="center large">这个段落引用两个类。</p>`
 #### 全局选择器 
 * 使用*号选择页面中所有元素
 #### 并列选择器
@@ -146,5 +146,104 @@
     * 匹配带有一个名为attr的属性的元素，任何地方出现了value都可以
     > i 例子:[attr^="a" i] 告诉浏览器，要以大小写不敏感的方式匹配ASCII字符
 
+## css属性
+### 颜色
+* 颜色可以通过来指定rgb,hex,hsl,rgba,hsla的值来进行实现
+* rgb（red-红,green-绿,blue-蓝）
+    * 每个参数 (red、green 以及 blue) 定义了 0 到 255 之间的颜色强度
+    * 所有值为255最大为白色，最小则为黑色，0为最小值
+    ![css颜色展示](./image/css/001.png)
+    * 而三个值相等则通常是来定义灰色阴影的
+    ![css灰色阴影](./image/css/002.png)
 
+* rgba（red,greed,blue,alpha）
+    * 和rgb基本没有区别，增加了alpha透明属性
+    * alpha参数介于0.0(完全透明)和1.0(完全不透明)之间的数字
+    ![透明属性](./image/css/003.png)
 
+* hex（#rrggbb）
+    * rr（红色），gg（绿色），bb（蓝色）的值是介乎于00（0~9）和ff（a~f）之间的十六进制值
+    * 00最小，ff最大
+    * 和gba一样，用三个相同的值来定义灰色阴影（如：#3c3c3c）
+
+* hsl（hue-色相，stauration-饱和度，lightness-亮度，alpha-透明度）
+    * 色相是色轮上的度数（从 0 到 360）
+        * 0（或 360）是红色，120 是绿色，240 是蓝色
+    * 饱和度是一个百分比的值
+    * 亮度也是一个百分比的值，0%是黑色（深色），100%是白色
+### 不透明度
+* opacity属性是设置整个元素的透明度
+* 取值和alpha完全一致，例：opacity:0.6
+### 背景
+* background-color 指定元素的背景颜色，可以搭配颜色名和透明色opacity来使用
+* background-image：url（"paper,png"）
+    * 指定元素的背景图像，默认情况下图像会重复来覆盖整个元素
+* background-repeat
+    * 用来更改background-image属性设置的图像重复现象
+    * background-repeat: repeat-x设置图像尽在水平方向重复，垂直将x改为y即可
+    * 也可以使用background-repeat: no-repeat来取消掉重复现象
+* background-position指定背景图像的位置，通常搭配no-repeat使用
+    * `position: left(默认)/center/right top(默认)/center/bottom;`图片的位置
+    * 例：`position:right 20px bottom 20px`
+    * 用calc()方案把背景图片定位到距离底边 10px 且距离右边 20px 的位置
+        ```
+        background: url("code-pirate.svg") no-repeat;
+        background-position: calc(100% - 20px) calc(100% - 10px);
+        ```
+        ![可能的值](./image/css/004.png)
+> PS:通常搭配background-attachment: fixed;背景固定使用，才能保证该属性在 Firefox 和 Opera 中正常工作
+* background-attachment决定图像是否跟随页面其余部分滚动
+    * fixed（固定），scroll（滚动）
+* background-clip规定背景的图片的定位区域
+    * border-box 背景被裁剪到边框盒，在整个容器中显示（默认值）
+    * padding-box  背景在内边距框（包含内容区域）显示。
+    * content-box 背景在内容框区域显示。
+* background-origin 相对于内容框来定位背景图像
+    * border-box 以边框左上角为参照进行位置设置
+    * padding-box  背景相对内边距框显示（默认值）
+    * content-box 以内容区域左上角为参照进行位置设置图像
+* background-size 规定背景图像的尺寸
+    * length设置宽高，有两个值第一个为宽，第二个为高，只设置一个值剩下的为auto
+    * percentage 以父元素的百分比来设置元素的宽高，第一位框第二位高，不设的值为auto
+    * cover 将背景图片按原来的缩放比将整个容器铺满	可等比例缩
+    * contain 将背景图片按照原来的缩放比，完整的显示到容器中,不确定是否会将容器填充满
+### 边框
+* border能设置元素边框的样式，宽度和颜色
+* border-style指定边框类型
+    * solid 实线 | dotted 点线 | dashed 虚线 | double 双边框 | groove 凹槽 | ridge 凸槽 | inset 3D凹槽 | outset 3D凸槽 | none 无边框 | hidden 隐藏边框
+    * 能同时使用4种不同的边框类型来达到混合效果，顺序是上、右、下、左
+
+### 基本属性简写
+* 背景属性简写
+    * `background: #ffffff url("tree.png") no-repeat right top;`
+    ```
+    在使用简写属性时，属性值的顺序为：
+    background-color
+    background-image
+    background-repeat
+    background-attachment
+    background-position
+    ```
+>PS:背景属性简写并不需要写全，只要按照顺序设置的值就行，这里没有使用background-attachment的值
+## 小方法
+### 文字对齐
+* 问题 : 在布局的时候需要将字数不同的行对其
+* 方法,需要定宽的块元素,设置 text-align: justify
+    * 还需要在内部包含一个行内块宽度百分百的元素,这里使用了 after
+
+```
+    span {
+        display: block;	// 必要
+        text-align: justify;  // 必要
+        height: 26px;
+        line-height: 26px;
+        width: 100px;	// 必要
+        margin-right: 5px;
+    
+        &::after {
+            content: '';
+            display: inline-block;	// 必要
+            width: 100%;
+        }
+    }
+```

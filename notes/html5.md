@@ -534,10 +534,11 @@
 
 
 
-## 表单表标签
+## 表单标签
 ### from标签
 * 标签用来定义一个表单，所有表单中的内容都要放在里面
 * 示例：这是一个拥有用户名、文本输入框和提交按钮的表单
+    
     ```html
         <form action="https://example.com/api" method="post">
             <label for="POST-name">用户名：</label>
@@ -545,10 +546,11 @@
             <input type="submit" value="提交">
         </form>
     ```
+    
 * 主要属性为：
     ```html
         accept-charset   //服务器接受的字符编码列表，使用空格分隔，默认与网页编码相同。
-        action           //服务器接收数据的 URL。
+        action           //指定接受并处理表单数据的服务器url地址
         autocomplete     //如果用户没有填写某个控件，浏览器是否可以自动填写该值。它的可能取值分别为off（不自动填写）和on（自动填写）。
         method           //提交数据的 HTTP 方法，可能的值有post（表单数据作为 HTTP 数据体发送），get（表单数据作为 URL 的查询字符串发送），dialog（表单位于<dialog>内部使用）。
         enctype          //当method属性等于post时，该属性指定提交给服务器的 MIME 类型。可能的值为application/x-www-form-urlencoded（默认值），multipart/form-data（文件上传的情况），text/plain。
@@ -556,7 +558,15 @@
         novalidate       //布尔属性，表单提交时是否取消验证。
         target           //在哪个窗口展示服务器返回的数据，可能的值有_self（当前窗口），_blank（新建窗口），_parent（父窗口），_top（顶层窗口），<iframe>标签的name属性（即表单返回结果展示在<iframe>窗口）。
     ```
+* 常用的表单使用
+    ``` 
+    <form action="url地址" method="提交方式" name="表单名称">
+        各种表单控件
+    </form>
+    ```
+
 * **enctype**
+    
     * 指定了使用post方法提交数据的时候，浏览器给出的mime类型
     * 属性有以下值：
         * 1、application/x-www-form-urlencoded是默认类型，控件名和控件值都要转义（空格转为*号，非数字和非字母转为%HH的形式，换行转为CR LF），控件名和控件值之间用=分隔。控件按照出现顺序排列，控件之间用&分隔
@@ -984,6 +994,47 @@
     * ``<wbr>``
         * 规定在文本中的何处适合添加换行符.
 
+## 自定义标签
+```
+myHero {
+display: block;
+background-color: #ddd;
+padding: 50px;
+font-size: 30px;
+}
+<myHero>我的第一个新元素</myHero>
+```
+
+## 浏览器低版本兼容
+```
+    <style>
+    header, section, footer, aside, nav, main, article, figure {
+        display: block; 
+    }
+</style>
+第一种解决方案
+<script>
+    //创建nav自定义标签使页面内的nav标签起作用-然后display:block;
+    document.createElement("nav");
+</script>
+第二种解决方案		引用js插件
+最佳	在什么版本下执行该段代码	在低于ie 8或等于ie 8版本才会执行
+<!--[if lte IE 8]>
+<script type="text/javascript" src="HTML/语义标签兼容处理/html5shiv.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]
+<script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js">
+</script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="http://cdn.static.runoob.com/libs/html5shiv/3.7/html5shiv.min.js">
+</script>
+<![endif]-->
+无语义标签
+<div></div>
+```
 
 
 ## 无语义标签
