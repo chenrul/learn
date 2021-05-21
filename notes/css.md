@@ -6,6 +6,7 @@
 * 若样式冲突则按照下面的循序来进行适用
     * 浏览器是根据优先级来决定当多个规则有不同选择器对应相同的元素的时候需要使用哪个规则。
     > PS:在使用复合属性的时候需要讲单属性来写在复合属性的后面，在前面会被覆盖掉 如：
+    >
     > > margin:0;复合属性 margin-top:0;单属性
     * 它基本上是一个衡量选择器具体选择哪些区域的尺度：
         * 一个元素选择器不是很具体 — 会选择页面上该类型的所有元素 — 所以它的优先级就会低一些。
@@ -49,9 +50,11 @@
 #### id选择器
 * 元素的ID在页面中是唯一的，所以ID选择器能选择一个唯一的元素
 * 写法为#后面紧跟ID属性值
+  
     > PS：ID名称和类名不能为数字开头
 #### 类选择器
 * 写法和ID选择器类似，在.后面紧跟元素的class属性值 
+  
     > PS：HTML元素能引用多个类，如：`<p class="center large">这个段落引用两个类。</p>`
 #### 全局选择器 
 * 使用*号选择页面中所有元素
@@ -187,10 +190,10 @@
     * 例：`position:right 20px bottom 20px`
     * 用calc()方案把背景图片定位到距离底边 10px 且距离右边 20px 的位置
         ```
-        background: url("code-pirate.svg") no-repeat;
-        background-position: calc(100% - 20px) calc(100% - 10px);
+        	background: url("code-pirate.svg") no-repeat;
+        	background-position: calc(100% - 20px) calc(100% - 10px);
         ```
-        ![可能的值](./image/css/004.png)
+      ![可能的值](./image/css/004.png)
 > PS:通常搭配background-attachment: fixed;背景固定使用，才能保证该属性在 Firefox 和 Opera 中正常工作
 * background-attachment决定图像是否跟随页面其余部分滚动
     * fixed（固定），scroll（滚动）
@@ -212,7 +215,18 @@
 * border-style指定边框类型
     * solid 实线 | dotted 点线 | dashed 虚线 | double 双边框 | groove 凹槽 | ridge 凸槽 | inset 3D凹槽 | outset 3D凸槽 | none 无边框 | hidden 隐藏边框
     * 能同时使用4种不同的边框类型来达到混合效果，顺序是上、右、下、左
-
+* border-width指定四个边的宽度，顺序是上右下左
+    * 可以将宽度设置为特定的大小（px，pt，cm，em为计量都可以）
+    * 可以设置预定值--thin细线| medium 中粗线 | thick 粗线
+* border-color 设置边框的颜色
+    * 能通过指定颜色名和HEX、RGB、HSL等方式设置颜色
+        * transparent 边框透明
+    > ps: 如果没有设置边框的颜色就会直接继承元素颜色
+* border-top| right| bottom| left 单独的四个边
+    * 边框的任意属性，比如类型颜色和宽度都能设置多个值
+        * 设置一个则上下左右全部一致，两个值则上下一致，左右一致，设置三四个值按照上右下左的顺序设置
+* 边框圆角 -- border-radius
+    * 
 ### 基本属性简写
 * 背景属性简写
     * `background: #ffffff url("tree.png") no-repeat right top;`
@@ -225,6 +239,9 @@
     background-position
     ```
 >PS:背景属性简写并不需要写全，只要按照顺序设置的值就行，这里没有使用background-attachment的值
+* 边框属性简写
+    * 简写顺序为宽度，类型和颜色，即`border: 5px solid red;`
+    * 也能指定单个边来设置`border-left: 6px solid red;`
 ## 小方法
 ### 文字对齐
 * 问题 : 在布局的时候需要将字数不同的行对其
