@@ -212,21 +212,23 @@
     * contain 将背景图片按照原来的缩放比，完整的显示到容器中,不确定是否会将容器填充满
 ### 边框
 * border能设置元素边框的样式，宽度和颜色
-* border-style指定边框类型
+* **border-style**指定边框类型
     * solid 实线 | dotted 点线 | dashed 虚线 | double 双边框 | groove 凹槽 | ridge 凸槽 | inset 3D凹槽 | outset 3D凸槽 | none 无边框 | hidden 隐藏边框
     * 能同时使用4种不同的边框类型来达到混合效果，顺序是上、右、下、左
-* border-width指定四个边的宽度，顺序是上右下左
+* **border-width**指定四个边的宽度，顺序是上右下左
     * 可以将宽度设置为特定的大小（px，pt，cm，em为计量都可以）
     * 可以设置预定值--thin细线| medium 中粗线 | thick 粗线
-* border-color 设置边框的颜色
+* **border-color** 设置边框的颜色
     * 能通过指定颜色名和HEX、RGB、HSL等方式设置颜色
         * transparent 边框透明
     > ps: 如果没有设置边框的颜色就会直接继承元素颜色
 * border-top| right| bottom| left 单独的四个边
     * 边框的任意属性，比如类型颜色和宽度都能设置多个值
         * 设置一个则上下左右全部一致，两个值则上下一致，左右一致，设置三四个值按照上右下左的顺序设置
-* 边框圆角 -- border-radius
-    * 
+* 边框圆角 -- border-radius：10px；
+* box-shadow:0px 0px 10px red; 边框阴影
+    * 第一个属性为设置x轴位置，第二个y轴，第三个模糊范围
+* 
 ### 基本属性简写
 * 背景属性简写
     * `background: #ffffff url("tree.png") no-repeat right top;`
